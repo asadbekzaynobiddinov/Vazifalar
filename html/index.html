@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Modern Form</title>
+</head>
+<body>
+    <div class="main-container">
+        <form action="../js/main.js" target="_blank" id="form">
+            <div class="form-layout">
+                <div class="input-box">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter username" class="input">
+                </div>
+                
+                <div class="password-box">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter password" class="input">
+                    <label class="password-info">Your password is between 4 and 12 characters</label>
+                </div>
+                
+                <div class="input-text-box">
+                    <label for="input-text">Input Text Label</label>
+                    <input type="text" name="input-text" id="input-text" placeholder="Typing" class="input">
+                    <label class="error-message">Error message informing me of a problem</label>
+                </div>
+
+                <div class="input-bodx">
+                    <input type="checkbox" name="remember-me" id="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+
+                <div class="onOff">
+                    <input type="radio" id="on" name="onOff">
+                    <label for="on">On</label>
+                    <input type="radio" id="off" name="onOff">
+                    <label for="off">Off</label>
+                </div>
+
+                <div class="radio-box">
+                    <div class="radio-input">
+                        <input type="radio" id="checkbox1" name="checkbox">
+                        <label for="checkbox1">Radio selection 1</label>
+                    </div>
+                    <div class="radio-input">
+                        <input type="radio" id="checkbox2" name="checkbox" checked>
+                        <label for="checkbox2">Radio selection 2</label>
+                    </div>
+                    <div class="radio-input">
+                        <input type="radio" id="checkbox3" name="checkbox">
+                        <label for="checkbox3">Radio selection 3</label>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <label for="dropdown">Dropdown Title</label>
+                    <select id="dropdown" class="input" id="dropdown">
+                        <option>Select option</option>
+                        <option>Dropdown option 1</option>
+                        <option>Dropdown option 2</option>
+                    </select>
+                </div>
+
+                <div class="button-box">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="next-btn" id="next-btn" type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+</html>

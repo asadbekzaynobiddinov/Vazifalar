@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-box, .password-box, .input-text-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box > input, 
+.password-box > input, 
+.input-text-box > input {
+    height: 56px;
+    margin-top: 10px;
+}
+
+.radio-input, .button-box, .dropdown {
+    display: flex;
+    justify-content: space-between;
+}
+
+.radio-box {
+    background-color: transparent;
+    padding: 10px;
+}
+
+body{
+    background-color: rgb(160, 139, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    height: 56px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 7px;
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.main-container {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    padding: 75px;
+    height: 1200px;
+    width: 760px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.form-layout {
+    background-color: transparent;
+    margin: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-box, .password-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.password-box, .input-text-box{
+    height: 108px;
+}
+
+.password-box > input {
+    height: 56px;
+    margin: 10px 0px;
+}
+
+.input-text-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-text-box > input{
+    margin: 10px 0px;
+    height: 56px;
+}
+
+.input-box {
+    height: 90px;
+}
+
+.input-box > input {
+    margin: 10px 0px;
+    height: 60px;
+}
+
+.radio-input {
+    display: flex;
+    flex-direction: row;
+}
+
+.input-box > label {
+    font-size: 16px;
+}
+
+.button-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown > label {
+    font-size: 10px;
+}
+
+.radio-box {
+    padding-left: 0px;
+    height: 136px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} 
+
+.radio-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.radio-input > input {
+    margin-left: 0px;
+    margin-right: 25px;
+}
+
+.dropdown > select{
+    height: 56px;
+}
+
+option {
+    height: 56px;
+}
+
+
+.cancel-btn, .next-btn{
+    height: 56px;
+    width: 172px;
+    border-radius: 7px;
+}
+
+.cancel-btn {
+    color: rgba(122, 92, 250, 1);
+    border-color: rgba(122, 92, 250, 0.5);
+}
+
+.next-btn {
+    color: #FFFFFF;
+    border: 0px;
+    background-color: rgba(122, 92, 250, 1);
+}
+
+.dropdown > label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
