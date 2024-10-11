@@ -1,0 +1,2 @@
+global.myVar = 'Hello world'
+
