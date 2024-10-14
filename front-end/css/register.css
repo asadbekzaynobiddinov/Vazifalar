@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background: url(../images/maldiv.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.main-cont {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 800px;
+    height: 600px;
+    color: #fff;
+    padding: 30px 40px;
+}
+
+.main-cont > h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.box{
+    margin: 30px;
+    display: flex;
+    background: transparent;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: 5px;
+}
+
+.box > .input-box {
+    width: 100%;
+}
+
+.label {
+    line-height: 5px;
+    margin: 5px;
+    font-size: 20px;
+}
+
+.input {
+    background: transparent;
+    width: 90%;
+    height: 45px;
+    margin: 5px;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+}
+
+.input::placeholder{
+    color: #fff;
+}
+
+#gender-box {
+    margin: 30px;
+    background: transparent;
+}
+
+#gender-box > p {
+    margin: 5px;
+    margin-bottom: 10px;
+    font-size: 23px;
+}
+
+#gender-box > .input-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#gender-box > .input-box > .item-gender-box {
+    width: 100%;
+    margin: 5px;
+    font-size: 16px;
+}
+
+#btn {
+    width: 90%;
+    margin-left: 40px;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+input {
+    font-size: 16px;
+    padding: 20px;
+    padding-bottom: 5%;
+}
+
+.login-link{
+    text-align: center;
+    margin: 30px 40px;
+}
+
+.login-link > p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link:hover{
+    text-decoration: underline;
+}
