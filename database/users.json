@@ -1,0 +1,22 @@
+[
+  {
+    "id": 2,
+    "username": "Asadbek",
+    "password": "secure123",
+    "fullName": "Zaynobiddinov",
+    "age": 19,
+    "email": "john@example.com",
+    "gender": "male",
+    "posts": []
+  },
+  {
+    "id": 2,
+    "username": "asadbek",
+    "password": "secure123",
+    "fullName": "Zaynobiddinov",
+    "age": 19,
+    "email": "john@example.com",
+    "gender": "male",
+    "posts": []
+  }
+]
