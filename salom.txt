@@ -1,0 +1,13 @@
+in services
+    get = name, day    -----------     done
+    put = name, day    -----------     done
+    delete = name, day -----------     done
+    getAll = name      -----------     done
+    post = data        -----------     done
+
+in controllers
+    get = name, day    -----------     done
+    put = name, day    -----------     done
+    delete = name, day -----------     done
+    getAll = name      -----------     done
+    post = data        -----------     done

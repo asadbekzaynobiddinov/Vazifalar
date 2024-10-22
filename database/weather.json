@@ -1,0 +1,30 @@
+[
+    {
+        "name": "fargona",
+        "gradus": 35,
+        "windSpeed": 5,
+        "humidity": 75,
+        "date": "2.07.2024"
+    },
+    {
+        "name": "fargona",
+        "gradus": 25,
+        "windSpeed": 5,
+        "humidity": 75,
+        "date": "12.10.2024"
+    },
+    {
+        "name": "fargona",
+        "gradus": 25,
+        "windSpeed": 5,
+        "humidity": 75,
+        "date": "13.10.2024"
+    },
+    {
+        "name": "fargona",
+        "gradus": 25,
+        "windSpeed": 5,
+        "humidity": 75,
+        "date": "14.10.2024"
+    }
+]
