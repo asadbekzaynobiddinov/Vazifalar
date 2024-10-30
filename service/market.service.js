@@ -1,4 +1,5 @@
-import { createMarketModel } from "../model/index.js";
+import { createMarketModel, findMarketById, updateMarketById, deleteMarketById } from "../model/index.js";
+import { getAllData, findProductById} from "../model/product.model.js";
 
 export const createMarketService = async (market) => {
   try {
@@ -20,14 +21,14 @@ export const findMarketService = async (id) => {
 
 export const updateMarketService = async (product, id) => {
   try {
-    const oldProduct = await findProductById(id);
+    const oldProduct = await findMarketById(id);
 
     const newProduct = {
       ...oldProduct[0],
       ...product,
     };
 
-    const result = await updateProductById(newProduct, id);
+    const result = await updateMarketById(newProduct, id);
 
     return result;
   } catch (error) {
@@ -48,8 +49,24 @@ export const deleteMarketService = async (id) => {
       }
     }
 
-    await deleteProductById(id)
+    await deleteMarketById(id)
   } catch (error) {
     throw new Error(error.message);
   }
 };
+
+
+export const getAllProductsService = async (page, pageSize, price, name) => {
+  try {
+    const products = getAllData(page, pageSize, price, name)
+
+    if(products.length ===0){
+      return {
+        error:true,
+        message:"PRODUCT not found"
+      }
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
