@@ -1,4 +1,4 @@
-import { createMarketService, findMarketService, updateMarketService, deleteMarketService, getAllProductsService} from "../service/index.js";
+import { createMarketService, findMarketService, updateMarketService, deleteMarketService, getAllMarketsService} from "../service/index.js";
 
 export const createMarketController = async (req, res, next) => {
   try {
@@ -67,13 +67,17 @@ export const deleteMarketController = async (req, res, next) => {
 };
 
 
-export const getAllProductsController = async (req, res, next) => {
+export const getAllMarketsController = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 1
-    const pageSize = parseInt(req.query.pageSize) || 10
-    const price = parseFloat(req.query.price) || 0
-    const name = req.query.name || ''
-    const result = getAllProductsService(page, pageSize, price, name)
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const name = req.query.name || '';
+    
+    const result = await getAllMarketsService(page, pageSize, name)
+
+    if (!result) {
+      return res.status(500).send({ error: true, message: "Service error" });
+    }
 
     if (result.error) {
       return res.status(409).send(result.message);
@@ -82,6 +86,6 @@ export const getAllProductsController = async (req, res, next) => {
     res.send(result);
 
   } catch (error) {
-    next(error)
+    next(error);
   }
 }

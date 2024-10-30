@@ -73,3 +73,18 @@ export const deleteMarketById= async (id) => {
     throw new Error(error);
   }
 };
+
+export const getAllMaekets = async (page, pageSize, name) => {
+  const offset = (page - 1) * pageSize;
+  try {
+    const result = await pool.query(
+      `SELECT * FROM product 
+       WHERE name ILIKE $1
+       LIMIT $2 OFFSET $3;`,
+      [`%${name}%`, pageSize, offset]
+    );
+    return result.rows;
+  } catch (error) {
+    throw new Error(error);
+  }
+}

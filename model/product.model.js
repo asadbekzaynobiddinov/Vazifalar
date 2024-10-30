@@ -93,18 +93,18 @@ export const deleteProductById = async (id) => {
   }
 };
 
-export const getAllData = async (page, pageSize, price, name) => {
-  const offset = (page - 1) * pageSize
+export const getAllProducts = async (page, pageSize, price, name) => {
+  const offset = (page - 1) * pageSize;
   try {
     const result = await pool.query(
-        ` SELECT * FROM product 
-          WHERE price > $1 
-          AND name ILIKE $2 
-          LIMIT $3 OFFSET $4;`,
+      `SELECT * FROM product 
+       WHERE price > $1 
+       AND name ILIKE $2 
+       LIMIT $3 OFFSET $4;`,
       [price, `%${name}%`, pageSize, offset]
-    )
-    return result.rows
+    );
+    return result.rows;
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
 }
