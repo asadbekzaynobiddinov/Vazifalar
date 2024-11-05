@@ -11,7 +11,7 @@ export const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12)
         const newUser = await User.create({ username, password: hashedPassword })
 
-        res.redirect('/login') // Tizimga kirish sahifasiga yo'naltirish
+        res.redirect('/login') 
     } catch (error) {
         res.status(500).send('Ro\'yxatdan o\'tishda xato yuz berdi')
     }
