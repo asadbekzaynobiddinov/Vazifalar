@@ -15,10 +15,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .catch((error) => console.log(error));
 
 
-// EJS ishlatish
 app.set('view engine', 'ejs');
 
-// Marshrutlarni sozlash
 app.use('/', authRoutes);
 
 const PORT = process.env.PORT || 5000;
