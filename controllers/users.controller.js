@@ -1,4 +1,4 @@
-import { registerAdmin, getAllUsers, updateUser, deleteUser } from "../service/index.js"
+import { registerAdmin, getAllUsers, updateUser, deleteUser, getMyAccountInfo } from "../service/index.js"
 
 
 export const registerAdminController = async (req, res, next) => {
@@ -20,6 +20,24 @@ export const registerAdminController = async (req, res, next) => {
     }
 }
 
+export const getMyAccountInfoController = async (req, res, next) => {
+    try {
+        const result = await getMyAccountInfo(req.params.id)
+        if(result.success){
+            return res.status(200).json({
+                status: 'Success',
+                yourAccount: result.data
+            })
+        }else{
+            return {
+                status: "Rejected",
+                error: result.error
+            }
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
 export const getAllUsersController = async (req, res, next) => {
     try {

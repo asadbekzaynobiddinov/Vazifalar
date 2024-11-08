@@ -32,7 +32,7 @@ export const getAllPostsController = async (req, res, next) => {
         } else {
             res.status(404).send({
                 status: 'Fail',
-                message: 'No posts found for this author.'
+                message: 'No posts found for this user.'
             });
         }
     } catch (error) {

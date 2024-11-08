@@ -1,10 +1,11 @@
 import { Router } from "express"
-import { registerAdminController, getAllUsersController, updatedUserController, deleteUseController } from "../controllers/index.js"
-import { isSuperAdmin } from "../middleware/superAdmin.js"
+import { registerAdminController, getAllUsersController, updatedUserController, deleteUseController, getMyAccountInfoController } from "../controllers/index.js"
+import { checkRole } from "../middleware/index.js"
 
 export const usersRouter = Router()
 
-usersRouter.post('/admin', isSuperAdmin, registerAdminController)
-usersRouter.get('/all', isSuperAdmin, getAllUsersController)
-usersRouter.put('/update/:id', isSuperAdmin, updatedUserController)
-usersRouter.delete('/delete/:id', isSuperAdmin, deleteUseController)
+usersRouter.get('/me/:id', checkRole(['SuperAdmin', 'Admin', 'User']))
+usersRouter.post('/admin', checkRole(['SuperAdmin', 'Admin']), registerAdminController)
+usersRouter.get('/all', checkRole(['SuperAdmin', 'Admin']), getAllUsersController)
+usersRouter.put('/update/:id', checkRole(['SuperAdmin', 'Admin']), updatedUserController)
+usersRouter.delete('/delete/:id', checkRole(['SuperAdmin']), deleteUseController)

@@ -19,22 +19,18 @@ export const createPostService = async (data) => {
 }
 
 
-export const getAllPostsService = async (authorId, page = 1, limit = 10) => {
+export const getAllPostsService = async (userId, page, limit) => {
     try {
         const skip = (page - 1) * limit
 
-        const posts = await Post.find({ authorId })
+        const posts = await Post.find({ userId })
                                 .skip(skip)
                                 .limit(limit)
 
-        const totalPosts = await Post.countDocuments({ authorId })
 
         return {
             success: true,
             data: posts,
-            page,
-            totalPages: Math.ceil(totalPosts / limit),
-            totalPosts
         }
 
     } catch (error) {

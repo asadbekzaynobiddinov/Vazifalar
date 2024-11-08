@@ -62,6 +62,23 @@ export const getAllUsers = async () => {
     }
 }
 
+export const getMyAccountInfo = async (id) => {
+    try {
+        const user = await User.findById(id).select('-password')
+        if(user){
+            return {
+                success: true,
+                data: user
+            }
+        }
+    } catch (error) {
+        return {
+            success: false,
+            error: error.message
+        }
+    }
+}
+
 
 export const updateUser = async (id, data) => {
     try {
