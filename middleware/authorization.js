@@ -1,4 +1,4 @@
-import jwt, { decode } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { User } from '../model/index.js';
 import { config } from 'dotenv'
 config()
@@ -42,7 +42,7 @@ export const isAdmin = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
 
-        const user = await User.findById(decode.id)
+        const user = await User.findById(decoded.id)
 
         if(!user){
             return res.status(404).json({message: "Foydalanuvchi Topilmadi"})
@@ -70,7 +70,7 @@ export const checkRole = (roles) => async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
 
-        const user = await User.findById(decode.id)
+        const user = await User.findById(decoded.id)
 
         if(!user){
             return res.status(404).json({message: "Foydalanuvchi Topilmadi"})
