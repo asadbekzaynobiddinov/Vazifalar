@@ -8,6 +8,7 @@ export const addCommentController = async (req, res, next) => {
         if(!result){
             return res.status(409).send(result.message)
         }
+        return res.status(200).send(result.message)
     } catch (error) {
         next(error)
     }
