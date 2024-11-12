@@ -11,11 +11,11 @@ export const authMiddleware = async (req, res, next) => {
                 message: errors
             })
         }
-        const user = await User.findOne({username: req.body.username})
+        const user = await User.findOne({email: req.body.email})
         if(user){
             return res.status(400).json({
                 status: "Rejected",
-                message: `${req.body.username} nomli foydalanuvchi allaqachon mavjud`
+                message: `${req.body.email} emailli foydalanuvchi allaqachon mavjud`
             })
         }
         next()

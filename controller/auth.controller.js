@@ -29,7 +29,8 @@ export const loginController = async (req, res, next) => {
         if(result.success){
             return res.status(200).json({
                 status: 'Success',
-                token: result.token
+                accessToken: result.accessToken,
+                refreshToken: result.refreshToken
             })
         }else{
             return res.status(400).json({

@@ -1,7 +1,7 @@
 import express from 'express'
 import { config } from 'dotenv'
 import { connect } from './database/connection.js'
-import { authRouter } from './routes/index.js'
+import { authRouter, commentRouter, courseRouter } from './routes/index.js'
 
 config()
 
@@ -14,6 +14,8 @@ const app = express()
 app.use(express.json())
 
 app.use('/auth', authRouter)
+app.use('/courses', courseRouter)
+app.use('/comments', commentRouter)
 
 app.use((err, req, res, next) => {
     if(err){

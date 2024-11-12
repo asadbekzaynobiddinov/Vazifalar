@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 
 const commentsSchema = mongoose.Schema({
     content: {type: String, required: true},

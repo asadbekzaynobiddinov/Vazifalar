@@ -51,10 +51,12 @@ export const loginService = async (data) => {
                 message: `email yoki parol hato`
             }
         }
-        const token = jwt.sign({id: user._id}, process.env.SECRET_KEY)
+        const accessToken = jwt.sign({id: user._id}, process.env.ACCESS_KEY)
+        const refreshToken = jwt.sign({id: user._id}, process.env.REFRESH_KEY)
         return {
             success: true,
-            token: token
+            accessToken: accessToken,
+            refreshToken: refreshToken
         }
     } catch (error) {
         return {
