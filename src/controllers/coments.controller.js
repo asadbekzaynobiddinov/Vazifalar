@@ -17,8 +17,8 @@ export const addComentController = async (req, res, next) => {
 export const getMyComentsController = async (req, res, next) => {
     try {
         const userId = req.user._id
-        const page = req.query.page
-        const limit = req.query.limit
+        const page = req.query.page || 1
+        const limit = req.query.limit || 5
         const result = await getMyComentsService(userId, page, limit)
         if(!result.success){
             return res.status(result.status).send(result.message)

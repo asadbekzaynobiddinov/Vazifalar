@@ -15,8 +15,8 @@ export const createArticleController = async (req, res, next) => {
 
 export const getAllArticlesController = async (req, res, next) => {
     try {
-        const page = req.query.page
-        const limit = req.query.limit
+        const page = req.query.page || 1
+        const limit = req.query.limit || 5
         const result = await getAllArticlesService(page, limit)
         if(!result.success){
             return res.status(result.status).send(result.message)
