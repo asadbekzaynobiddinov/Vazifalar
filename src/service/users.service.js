@@ -31,6 +31,7 @@ export const UsersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -52,6 +53,7 @@ export const UsersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -72,6 +74,7 @@ export const UsersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }, 
@@ -92,6 +95,7 @@ export const UsersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -112,6 +116,7 @@ export const UsersService = {
                 message: 'User muvaffaqiyatli o\'chirildi'
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }

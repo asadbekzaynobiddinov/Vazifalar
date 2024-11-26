@@ -18,6 +18,7 @@ export const CoursesService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -39,6 +40,7 @@ export const CoursesService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -59,6 +61,7 @@ export const CoursesService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }, 
@@ -79,6 +82,7 @@ export const CoursesService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -99,6 +103,7 @@ export const CoursesService = {
                 message: 'Course muvaffaqiyatli o\'chirildi'
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }

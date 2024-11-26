@@ -1,6 +1,7 @@
 import db from "../db/index.js"
 import { hashPassword, comparePassword, sendMail } from "../utils/index.js";
 import { generateToken } from "../utils/index.js";
+import { logger } from "../utils/index.js";
 
 
 export const AuthService = {
@@ -39,6 +40,7 @@ export const AuthService = {
                 message: registeredUser
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -76,6 +78,7 @@ export const AuthService = {
             }
 
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }

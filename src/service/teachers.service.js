@@ -17,6 +17,7 @@ export const TeachersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -38,6 +39,7 @@ export const TeachersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -58,6 +60,7 @@ export const TeachersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }, 
@@ -78,6 +81,7 @@ export const TeachersService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -98,6 +102,7 @@ export const TeachersService = {
                 message: 'Teacher muvaffaqiyatli o\'chirildi'
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }

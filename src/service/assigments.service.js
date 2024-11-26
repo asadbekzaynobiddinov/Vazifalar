@@ -1,4 +1,5 @@
 import db from '../db/index.js'
+import {logger} from '../utils/index.js'
 
 export const AssigmentsService = {
     create: async (assigment) => {
@@ -17,6 +18,7 @@ export const AssigmentsService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -38,6 +40,7 @@ export const AssigmentsService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -58,6 +61,7 @@ export const AssigmentsService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }, 
@@ -78,6 +82,7 @@ export const AssigmentsService = {
                 message: result
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     },
@@ -98,6 +103,7 @@ export const AssigmentsService = {
                 message: 'Assigment muvaffaqiyatli o\'chirildi'
             }
         } catch (error) {
+            logger.error(error)
             throw new Error(error)
         }
     }
