@@ -11,6 +11,8 @@ app.use('/students', Routes.studentsRouter)
 app.use('/teachers', Routes.teachersRouter)
 app.use('/users', Routes.usersRouter)
 app.use('/auth', Routes.authRouter)
+app.use('/lessons', Routes.lessonRouter)
+app.use('/homework', Routes.homeworkRouter)
 
 
 export default app
