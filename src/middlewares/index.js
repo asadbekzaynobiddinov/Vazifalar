@@ -5,7 +5,7 @@ import {validateTeacher} from './teachers.middleware.js'
 import {validateUser} from './user.middleware.js'
 import { validateLesson } from './lesson.mmiddleware.js'
 import { validateHomework } from './homework.middleware.js'
-
+import { validateExam } from './exam.middleware.js'
 
 const Validators = {
     validateAssigment,
@@ -14,7 +14,8 @@ const Validators = {
     validateTeacher,
     validateUser,
     validateLesson,
-    validateHomework
+    validateHomework,
+    validateExam
 }
 
 export default Validators

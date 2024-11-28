@@ -6,6 +6,7 @@ import { teachersRouter } from "./teachers.routes.js";
 import { authRouter } from "./auth.routes.js";
 import { homeworkRouter } from "./homework.routes.js";
 import { lessonRouter } from "./lesson.routes.js";
+import { examRouter } from "./exam.routes.js";
 
 const Routes = {
     assigmentRouter,
@@ -15,7 +16,8 @@ const Routes = {
     teachersRouter,
     authRouter,
     lessonRouter,
-    homeworkRouter
+    homeworkRouter,
+    examRouter
 }
 
 export default Routes

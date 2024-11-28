@@ -1,15 +1,15 @@
 import db from '../db/index.js'
 
 
-export const CoursesService = {
-    create: async (course) => {
+export const ExamsService = {
+    create: async (exam) => {
         try {
-            const result = await db('courses').insert(course).returning("*")
+            const result = await db('exams').insert(exam).returning("*")
             if(result.length === 0){
                 return {
                     success: false,
                     status: 404,
-                    message: 'Course yaratilmadi'
+                    message: 'Exam yaratilmadi'
                 }
             }
             return {
@@ -26,12 +26,12 @@ export const CoursesService = {
     getAll: async (page, limit) => {
         try {
             const offset = (page - 1) * limit
-            const result = await db('courses').select("*").limit(limit).offset(offset)
+            const result = await db('exams').select("*").limit(limit).offset(offset)
             if(result.length === 0){
                 return {
                     success: false,
                     status: 400,
-                    message: 'Course topilmadi'
+                    message: 'Exam topilmadi'
                 }
             }
             return {
@@ -47,12 +47,12 @@ export const CoursesService = {
 
     getOne: async (id) => {
         try {
-            const result = await db('courses').select("*").where('id', id)
+            const result = await db('exams').select("*").where('id', id)
             if(result.length === 0){
                 return {
                     success: false,
                     status: 404,
-                    message: 'Course topilmadi'
+                    message: 'Exam topilmadi'
                 }
             }
             return {
@@ -68,12 +68,12 @@ export const CoursesService = {
 
     update: async (id, data) => {
         try {
-            const result = await db('courses').update(data).where('id', id).returning('*')
+            const result = await db('exams').update(data).where('id', id).returning('*')
             if(result.length === 0){
                 return {
                     success: false,
                     status: 404,
-                    message: 'Course topilmadi'
+                    message: 'Exam topilmadi'
                 }
             }
             return {
@@ -89,18 +89,18 @@ export const CoursesService = {
 
     delete: async (id) => {
         try {
-            const result = await db('courses').delete().where('id', id)
+            const result = await db('exams').delete().where('id', id)
             if(result === 0){
                 return {
                     success: false,
                     status: 404,
-                    message: 'Course topilmadi'
+                    message: 'Exam topilmadi'
                 }
             }
             return {
                 success: true,
                 status: 200,
-                message: 'Course muvaffaqiyatli o\'chirildi'
+                message: 'Exam muvaffaqiyatli o\'chirildi'
             }
         } catch (error) {
             logger.error(error)

@@ -7,6 +7,6 @@ export const lessonRouter = Router()
 
 lessonRouter.get('/getAll', LessonController.getAll)
 lessonRouter.get('/getOne', LessonController.getOne)
-lessonRouter.post('/create', authGuard, roleGuard('admin'), LessonController.create)
-lessonRouter.put('/update/:id', authGuard, roleGuard('admin'), Validators.validateCourse, LessonController.update)
+lessonRouter.post('/create', authGuard, roleGuard('admin'), Validators.validateLesson, LessonController.create)
+lessonRouter.put('/update/:id', authGuard, roleGuard('admin'), Validators.validateLesson, LessonController.update)
 lessonRouter.delete('/delete/:id', authGuard, roleGuard('admin'), LessonController.delete)

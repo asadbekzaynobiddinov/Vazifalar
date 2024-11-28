@@ -13,6 +13,7 @@ app.use('/users', Routes.usersRouter)
 app.use('/auth', Routes.authRouter)
 app.use('/lessons', Routes.lessonRouter)
 app.use('/homework', Routes.homeworkRouter)
+app.use('/exams', Routes.examRouter)
 
 
 export default app

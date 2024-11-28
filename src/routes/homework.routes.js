@@ -7,6 +7,6 @@ export const homeworkRouter = Router()
 
 homeworkRouter.get('/getAll', HomeworkController.getAll)
 homeworkRouter.get('/getOne', HomeworkController.getOne)
-homeworkRouter.post('/create', authGuard, roleGuard('admin'), HomeworkController.create)
-homeworkRouter.put('/update/:id', authGuard, roleGuard('admin'), Validators.validateCourse, HomeworkController.update)
+homeworkRouter.post('/create', authGuard, roleGuard('admin'), Validators.validateHomework, HomeworkController.create)
+homeworkRouter.put('/update/:id', authGuard, roleGuard('admin'), Validators.validateHomework, HomeworkController.update)
 homeworkRouter.delete('/delete/:id', authGuard, roleGuard('admin'), HomeworkController.delete)
