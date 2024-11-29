@@ -1,4 +1,4 @@
-import db from "../database/index.js"
+import db from "../db/index.js"
 
 const tableName = "users"
 export const UsersService = {
