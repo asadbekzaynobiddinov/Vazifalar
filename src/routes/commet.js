@@ -1,14 +1,17 @@
 import { Router } from 'express'
+import { CommentController } from '../controllers/comment.controller.js'
+import { authGuard } from '../middlewares/auth.guard.js'
+
 
 export const commentRouter = Router()
 
-//all // paginatin // filter
-commentRouter.get('/:slug', commentController.register)
-// get by slug
-commentRouter.get('/:slug/:id', commentController.register)
-//create
-commentRouter.post('/:slug', commentController.login)
-//update by slug
-commentRouter.put('/:slug/:id', commentController.login)
-//delte by slug
-commentRouter.delete('/:slug/:id', commentController.login)
+
+commentRouter.get('/', CommentController.getAll)
+
+commentRouter.get('/:id', CommentController.getOne)
+
+commentRouter.post('/',authGuard, CommentController.create)
+
+commentRouter.put('/:id',authGuard, CommentController.update)
+
+commentRouter.delete('/:id', authGuard, CommentController.delete)

@@ -1,11 +1,13 @@
 import express from "express";
-import { authRouter } from "./src/routes/index.js";
+import { authRouter, postRouter, commentRouter } from "./src/routes/index.js";
 
 export const app = express()
 
 app.use(express.json())
 
 app.use('/auth', authRouter)
+app.use('/post', postRouter)
+app.use('/comment', commentRouter)
 
 app.use((err, req, res, next) => {
     if(err){

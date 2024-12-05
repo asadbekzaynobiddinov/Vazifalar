@@ -1,14 +1,16 @@
 import { Router } from 'express'
+import { PostController } from '../controllers/post.controller.js'
+import { authGuard } from '../middlewares/auth.guard.js'
 
 export const postRouter = Router()
 
-//all // paginatin // filter
-postRouter.get('/', postController.register)
-// get by slug
-postRouter.get('/:slug', postController.register)
-//create
-postRouter.post('/', postController.login)
-//update by slug
-postRouter.put('/:slug', postController.login)
-//delte by slug
-postRouter.delete('/:slug', postController.login)
+
+postRouter.get('/', PostController.getAll)
+
+postRouter.get('/:id', PostController.getOne)
+
+postRouter.post('/', authGuard, PostController.create)
+
+postRouter.put('/:id', authGuard, PostController.update)
+
+postRouter.delete('/:id', authGuard, PostController.delete)
