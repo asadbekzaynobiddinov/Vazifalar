@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Artist } from './artist.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ArtistService {
-  create(createArtistDto: CreateArtistDto) {
-    return 'This action adds a new artist';
+  constructor(
+    @InjectModel(Artist.name) private readonly artistModel: Model<Artist>,
+  ) {}
+  async create(createArtistDto: CreateArtistDto) {
+    const newArtist = new this.artistModel(createArtistDto);
+    return await newArtist.save();
   }
 
-  findAll() {
-    return `This action returns all artist`;
+  async findAll() {
+    return await this.artistModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} artist`;
+  async findOne(id: string) {
+    return await this.artistModel.findById(id);
   }
 
-  update(id: number, updateArtistDto: UpdateArtistDto) {
-    return `This action updates a #${id} artist`;
+  async update(id: string, updateArtistDto: UpdateArtistDto) {
+    return await this.artistModel.findByIdAndUpdate(id, updateArtistDto, {
+      new: true,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} artist`;
+  async remove(id: string) {
+    return await this.artistModel.findByIdAndDelete(id);
   }
 }
