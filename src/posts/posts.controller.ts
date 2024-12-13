@@ -6,37 +6,63 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Response } from 'express';
+import { responseMessage } from 'src/utils/response.message';
+import { responseHandler } from 'src/utils/response.handler';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  async create(@Body() createPostDto: CreatePostDto, @Res() res: Response) {
+    const result: responseMessage =
+      await this.postsService.create(createPostDto);
+    responseHandler(result, res);
   }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  async findAll(
+    @Query() query: { page: number; limit: number },
+    @Res() res: Response,
+  ) {
+    const page = query.page || 1;
+    const limit = query.limit || 10;
+    const result: responseMessage = await this.postsService.findAll(
+      page,
+      limit,
+    );
+    responseHandler(result, res);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    const result: responseMessage = await this.postsService.findOne(id);
+    responseHandler(result, res);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updatePostDto: UpdatePostDto,
+    @Res() res: Response,
+  ) {
+    const result: responseMessage = await this.postsService.update(
+      id,
+      updatePostDto,
+    );
+    responseHandler(result, res);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  async remove(@Param('id') id: string, @Res() res: Response) {
+    const result: responseMessage = await this.postsService.remove(id);
+    responseHandler(result, res);
   }
 }

@@ -6,37 +6,66 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  Res,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { responseHandler } from 'src/utils/response.handler';
+import { responseMessage } from 'src/utils/response.message';
+import { Response } from 'express';
 
 @Controller('comments')
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentsService.create(createCommentDto);
+  async create(
+    @Body() createCommentDto: CreateCommentDto,
+    @Res() res: Response,
+  ) {
+    const result: responseMessage =
+      await this.commentsService.create(createCommentDto);
+    responseHandler(result, res);
   }
 
   @Get()
-  findAll() {
-    return this.commentsService.findAll();
+  async findAll(
+    @Query() query: { page: number; limit: number },
+    @Res() res: Response,
+  ) {
+    const page = query.page || 1;
+    const limit = query.limit || 10;
+    const result: responseMessage = await this.commentsService.findAll(
+      page,
+      limit,
+    );
+    responseHandler(result, res);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    const result: responseMessage = await this.commentsService.findOne(id);
+    responseHandler(result, res);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentsService.update(+id, updateCommentDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateCommentDto: UpdateCommentDto,
+    @Res() res: Response,
+  ) {
+    const result: responseMessage = await this.commentsService.update(
+      id,
+      updateCommentDto,
+    );
+    responseHandler(result, res);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentsService.remove(+id);
+  async remove(@Param('id') id: string, @Res() res: Response) {
+    const result: responseMessage = await this.commentsService.remove(id);
+    responseHandler(result, res);
   }
 }
