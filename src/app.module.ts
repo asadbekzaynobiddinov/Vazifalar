@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     UsersModule,
     PostsModule,
     CommentsModule,
-    MongooseModule.forRoot('mongodb://localhost/21017/blog'),
+    MongooseModule.forRoot('mongodb://localhost:27017/blog'),
   ],
 })
 export class AppModule {}
