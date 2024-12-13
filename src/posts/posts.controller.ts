@@ -13,7 +13,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Response } from 'express';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 import { responseHandler } from 'src/utils/response.handler';
 
 @Controller('posts')
@@ -22,7 +22,7 @@ export class PostsController {
 
   @Post()
   async create(@Body() createPostDto: CreatePostDto, @Res() res: Response) {
-    const result: responseMessage =
+    const result: IResponseMessage =
       await this.postsService.create(createPostDto);
     responseHandler(result, res);
   }
@@ -34,7 +34,7 @@ export class PostsController {
   ) {
     const page = query.page || 1;
     const limit = query.limit || 10;
-    const result: responseMessage = await this.postsService.findAll(
+    const result: IResponseMessage = await this.postsService.findAll(
       page,
       limit,
     );
@@ -43,7 +43,7 @@ export class PostsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.postsService.findOne(id);
+    const result: IResponseMessage = await this.postsService.findOne(id);
     responseHandler(result, res);
   }
 
@@ -53,7 +53,7 @@ export class PostsController {
     @Body() updatePostDto: UpdatePostDto,
     @Res() res: Response,
   ) {
-    const result: responseMessage = await this.postsService.update(
+    const result: IResponseMessage = await this.postsService.update(
       id,
       updatePostDto,
     );
@@ -62,7 +62,7 @@ export class PostsController {
 
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.postsService.remove(id);
+    const result: IResponseMessage = await this.postsService.remove(id);
     responseHandler(result, res);
   }
 }

@@ -13,7 +13,7 @@ import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { responseHandler } from 'src/utils/response.handler';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 import { Response } from 'express';
 
 @Controller('comments')
@@ -25,7 +25,7 @@ export class CommentsController {
     @Body() createCommentDto: CreateCommentDto,
     @Res() res: Response,
   ) {
-    const result: responseMessage =
+    const result: IResponseMessage =
       await this.commentsService.create(createCommentDto);
     responseHandler(result, res);
   }
@@ -37,7 +37,7 @@ export class CommentsController {
   ) {
     const page = query.page || 1;
     const limit = query.limit || 10;
-    const result: responseMessage = await this.commentsService.findAll(
+    const result: IResponseMessage = await this.commentsService.findAll(
       page,
       limit,
     );
@@ -46,7 +46,7 @@ export class CommentsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.commentsService.findOne(id);
+    const result: IResponseMessage = await this.commentsService.findOne(id);
     responseHandler(result, res);
   }
 
@@ -56,7 +56,7 @@ export class CommentsController {
     @Body() updateCommentDto: UpdateCommentDto,
     @Res() res: Response,
   ) {
-    const result: responseMessage = await this.commentsService.update(
+    const result: IResponseMessage = await this.commentsService.update(
       id,
       updateCommentDto,
     );
@@ -65,7 +65,7 @@ export class CommentsController {
 
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.commentsService.remove(id);
+    const result: IResponseMessage = await this.commentsService.remove(id);
     responseHandler(result, res);
   }
 }

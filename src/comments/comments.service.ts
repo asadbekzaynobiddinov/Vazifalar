@@ -4,14 +4,14 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Comment } from './entities/comment.entity';
 import { Model } from 'mongoose';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 
 @Injectable()
 export class CommentsService {
   constructor(
     @InjectModel(Comment.name) private readonly commentModel: Model<Comment>,
   ) {}
-  async create(createCommentDto: CreateCommentDto): Promise<responseMessage> {
+  async create(createCommentDto: CreateCommentDto): Promise<IResponseMessage> {
     const newComment = new this.commentModel(createCommentDto);
     await newComment.save();
     if (!newComment || newComment == null) {
@@ -28,7 +28,7 @@ export class CommentsService {
     };
   }
 
-  async findAll(page: number, limit: number): Promise<responseMessage> {
+  async findAll(page: number, limit: number): Promise<IResponseMessage> {
     const skip = (page - 1) * limit;
     const comments = await this.commentModel.find().skip(skip).limit(limit);
     if (comments.length === 0) {
@@ -45,7 +45,7 @@ export class CommentsService {
     };
   }
 
-  async findOne(id: string): Promise<responseMessage> {
+  async findOne(id: string): Promise<IResponseMessage> {
     const comment = await this.commentModel.findById(id);
     if (!comment || comment == null) {
       return {
@@ -64,7 +64,7 @@ export class CommentsService {
   async update(
     id: string,
     updateCommentDto: UpdateCommentDto,
-  ): Promise<responseMessage> {
+  ): Promise<IResponseMessage> {
     const updatedComment = await this.commentModel.findByIdAndUpdate(
       id,
       updateCommentDto,
@@ -84,7 +84,7 @@ export class CommentsService {
     };
   }
 
-  async remove(id: string): Promise<responseMessage> {
+  async remove(id: string): Promise<IResponseMessage> {
     const deletedComment = await this.commentModel.findByIdAndDelete(id);
     if (!deletedComment || deletedComment == null) {
       return {

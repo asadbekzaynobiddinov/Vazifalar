@@ -5,14 +5,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './entities/user.entity';
 import { hashPassword } from 'src/utils/bcrypt';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
-  async create(createUserDto: CreateUserDto): Promise<responseMessage> {
+  async create(createUserDto: CreateUserDto): Promise<IResponseMessage> {
     const userExists: Array<CreateUserDto> = await this.userModel.find({
       email: createUserDto.email,
     });
@@ -39,7 +39,7 @@ export class UsersService {
     };
   }
 
-  async findAll(page: number, limit: number): Promise<responseMessage> {
+  async findAll(page: number, limit: number): Promise<IResponseMessage> {
     const skip = (page - 1) * limit;
     const users = await this.userModel.find().skip(skip).limit(limit);
     if (users.length === 0) {
@@ -56,7 +56,7 @@ export class UsersService {
     };
   }
 
-  async findOne(id: string): Promise<responseMessage> {
+  async findOne(id: string): Promise<IResponseMessage> {
     const user: Array<CreateUserDto> = await this.userModel.findById(id);
 
     if (user.length === 0) {
@@ -76,7 +76,7 @@ export class UsersService {
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
-  ): Promise<responseMessage> {
+  ): Promise<IResponseMessage> {
     const updatedUser: UpdateUserDto = await this.userModel
       .findByIdAndUpdate(id, updateUserDto, {
         new: true,
@@ -96,7 +96,7 @@ export class UsersService {
     };
   }
 
-  async remove(id: string): Promise<responseMessage> {
+  async remove(id: string): Promise<IResponseMessage> {
     const deletedUser: CreateUserDto = await this.userModel
       .findByIdAndDelete(id)
       .select('-password');

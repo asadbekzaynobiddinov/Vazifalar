@@ -4,14 +4,14 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './entities/post.entity';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectModel(Post.name) private readonly postModule: Model<Post>,
   ) {}
-  async create(createPostDto: CreatePostDto): Promise<responseMessage> {
+  async create(createPostDto: CreatePostDto): Promise<IResponseMessage> {
     const newPost = new this.postModule(createPostDto);
     await newPost.save();
     if (!newPost || newPost == null) {
@@ -28,7 +28,7 @@ export class PostsService {
     };
   }
 
-  async findAll(page: number, limit: number): Promise<responseMessage> {
+  async findAll(page: number, limit: number): Promise<IResponseMessage> {
     const skip = (page - 1) * limit;
     const posts = await this.postModule.find().skip(skip).limit(limit);
     if (posts.length === 0) {
@@ -45,7 +45,7 @@ export class PostsService {
     };
   }
 
-  async findOne(id: string): Promise<responseMessage> {
+  async findOne(id: string): Promise<IResponseMessage> {
     const post = await this.postModule.findById(id);
     if (!post || post == null) {
       return {
@@ -64,7 +64,7 @@ export class PostsService {
   async update(
     id: string,
     updatePostDto: UpdatePostDto,
-  ): Promise<responseMessage> {
+  ): Promise<IResponseMessage> {
     const updatedPost = await this.postModule.findByIdAndUpdate(
       id,
       updatePostDto,
@@ -86,7 +86,7 @@ export class PostsService {
     };
   }
 
-  async remove(id: string): Promise<responseMessage> {
+  async remove(id: string): Promise<IResponseMessage> {
     const deletedPost = await this.postModule.findByIdAndDelete(id);
     if (!deletedPost || deletedPost == null) {
       return {

@@ -14,7 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { responseHandler } from 'src/utils/response.handler';
-import { responseMessage } from 'src/utils/response.message';
+import { IResponseMessage } from 'src/utils/response.message';
 
 @Controller('users')
 export class UsersController {
@@ -22,7 +22,7 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
-    const result: responseMessage =
+    const result: IResponseMessage =
       await this.usersService.create(createUserDto);
     responseHandler(result, res);
   }
@@ -34,7 +34,7 @@ export class UsersController {
   ) {
     const page = query.page || 1;
     const limit = query.limit || 10;
-    const result: responseMessage = await this.usersService.findAll(
+    const result: IResponseMessage = await this.usersService.findAll(
       page,
       limit,
     );
@@ -43,7 +43,7 @@ export class UsersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.usersService.findOne(id);
+    const result: IResponseMessage = await this.usersService.findOne(id);
     responseHandler(result, res);
   }
 
@@ -53,7 +53,7 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
     @Res() res: Response,
   ) {
-    const result: responseMessage = await this.usersService.update(
+    const result: IResponseMessage = await this.usersService.update(
       id,
       updateUserDto,
     );
@@ -62,7 +62,7 @@ export class UsersController {
 
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response) {
-    const result: responseMessage = await this.usersService.remove(id);
+    const result: IResponseMessage = await this.usersService.remove(id);
     responseHandler(result, res);
   }
 }
