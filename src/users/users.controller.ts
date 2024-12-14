@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -15,6 +16,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Response } from 'express';
 import { responseHandler } from 'src/utils/response.handler';
 import { IResponseMessage } from 'src/utils/response.message';
+import { AuthGuard, RoleGuard } from 'src/middlewares';
 
 @Controller('users')
 export class UsersController {
@@ -27,6 +29,7 @@ export class UsersController {
     responseHandler(result, res);
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
   @Get()
   async findAll(
     @Query() query: { page: number; limit: number },
@@ -41,12 +44,14 @@ export class UsersController {
     responseHandler(result, res);
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
     const result: IResponseMessage = await this.usersService.findOne(id);
     responseHandler(result, res);
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -60,6 +65,7 @@ export class UsersController {
     responseHandler(result, res);
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response) {
     const result: IResponseMessage = await this.usersService.remove(id);

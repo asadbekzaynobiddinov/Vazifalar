@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Res,
+  UseGuards,
   Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
@@ -15,7 +16,9 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { Response } from 'express';
 import { IResponseMessage } from 'src/utils/response.message';
 import { responseHandler } from 'src/utils/response.handler';
+import { AuthGuard } from 'src/middlewares';
 
+@UseGuards(AuthGuard)
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}

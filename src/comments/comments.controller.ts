@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
@@ -15,7 +16,9 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { responseHandler } from 'src/utils/response.handler';
 import { IResponseMessage } from 'src/utils/response.message';
 import { Response } from 'express';
+import { AuthGuard } from 'src/middlewares';
 
+@UseGuards(AuthGuard)
 @Controller('comments')
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
