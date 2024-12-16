@@ -22,6 +22,9 @@ export class User extends Document {
 
   @Prop({ enum: UserRole, default: UserRole.User })
   role: UserRole;
+
+  @Prop({ default: false })
+  is_active: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

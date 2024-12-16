@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/users/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
+import { MailService } from './mail.service';
+import { OtpModule } from 'src/otp/otp.module';
 
 @Module({
   imports: [
@@ -11,8 +13,9 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({
       secret: 'MySupperSecretKey',
     }),
+    OtpModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, MailService],
 })
 export class AuthModule {}

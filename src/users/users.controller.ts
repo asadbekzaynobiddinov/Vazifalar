@@ -9,6 +9,7 @@ import {
   Query,
   Res,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,7 +18,9 @@ import { Response } from 'express';
 import { responseHandler } from 'src/utils/response.handler';
 import { IResponseMessage } from 'src/utils/response.message';
 import { AuthGuard, RoleGuard } from 'src/middlewares';
+import { UsersInterceptor } from './users.interceptor';
 
+@UseInterceptors(UsersInterceptor)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -31,6 +34,7 @@ export class UsersController {
 
   @UseGuards(AuthGuard, RoleGuard)
   @Get()
+  @UseInterceptors(UseInterceptors)
   async findAll(
     @Query() query: { page: number; limit: number },
     @Res() res: Response,

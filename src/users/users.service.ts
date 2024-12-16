@@ -40,6 +40,7 @@ export class UsersService {
   }
 
   async findAll(page: number, limit: number): Promise<IResponseMessage> {
+    // throw new Error('Custom error');
     const skip = (page - 1) * limit;
     const users = await this.userModel.find().skip(skip).limit(limit);
     if (users.length === 0) {

@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
@@ -7,6 +11,10 @@ import { Model } from 'mongoose';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { hashPassword, comparePassword } from 'src/utils/bcrypt';
 import { IResponseMessage } from 'src/utils/response.message';
+import { MailService } from './mail.service';
+import { generateOtp } from 'src/utils/otp';
+import { OtpService } from 'src/otp/otp.service';
+import { CreateOtpDto } from 'src/otp/dto/create-otp.dto';
 
 interface ILoginMessage extends IResponseMessage {
   accessToken: string;
@@ -18,6 +26,8 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly jwtService: JwtService,
+    private readonly mailService: MailService,
+    private readonly otpService: OtpService,
   ) {}
   async register(user: CreateUserDto): Promise<IResponseMessage> {
     const userExists: Array<CreateUserDto> = await this.userModel.find({
@@ -35,14 +45,22 @@ export class AuthService {
     const newUser = new this.userModel(user);
     newUser.password = await hashPassword(newUser.password);
 
-    await newUser.save();
-    const userObject = newUser.toObject();
+    const otp = generateOtp();
+    const newOtp: CreateOtpDto = {
+      user_email: newUser.email,
+      otp: +otp,
+      expires_in: new Date(Date.now() + 10 * 60 * 1000),
+    };
 
-    delete userObject.password;
+    await this.otpService.create(newOtp);
+    await newUser.save();
+
+    this.mailService.sendMail(newUser.email, 'OTP', otp);
+
     return {
       success: true,
       status: 201,
-      message: userObject,
+      message: `${newUser.email} ga otp kod jo'natildi`,
     };
   }
 
@@ -85,5 +103,31 @@ export class AuthService {
       accessToken,
       refreshToken,
     };
+  }
+
+  async verify(email: string, otp: number): Promise<string> {
+    const otpRecord = await this.otpService.find(otp);
+
+    if (!otpRecord) {
+      throw new NotFoundException('Otp topilmadi');
+    }
+
+    if (Date.now() > otpRecord.expires_in.getTime()) {
+      await this.otpService.delete(otpRecord._id.toString());
+      await this.userModel.deleteOne({ email: otpRecord.user_email });
+      throw new UnauthorizedException('Otp eskirgan');
+    }
+
+    if (otpRecord.otp != otp) {
+      throw new UnauthorizedException('Otp kodi mos emas');
+    }
+
+    const currentUser = await this.userModel.findOne({ email });
+    currentUser.is_active = true;
+    await currentUser.save();
+
+    await this.otpService.delete(otpRecord._id.toString());
+
+    return 'User is active';
   }
 }

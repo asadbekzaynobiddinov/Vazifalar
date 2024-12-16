@@ -4,6 +4,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { responseHandler } from 'src/utils/response.handler';
 import { Response } from 'express';
+import { VerifyDto } from './dto/verifyDto';
 
 @Controller('auth')
 export class AuthController {
@@ -25,5 +26,10 @@ export class AuthController {
       accessToken: result.accessToken,
       refreshToken: result.refreshToken,
     });
+  }
+
+  @Post('verify')
+  async verify(@Body() verifyDto: VerifyDto) {
+    return await this.authService.verify(verifyDto.email, verifyDto.otp);
   }
 }
