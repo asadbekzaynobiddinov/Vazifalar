@@ -5,6 +5,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  // InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -120,5 +121,57 @@ export class AuthService {
     await this.userRepo.update({ email }, { is_active: true });
 
     return 'user is active';
+  }
+
+  refreshAccess(refreshToken: string) {
+    const oldPayload = this.jwt.verify(refreshToken, {
+      secret: process.env.JWT_SECRET,
+    });
+
+    const payload = {
+      sub: oldPayload.sub,
+      role: oldPayload.role,
+    };
+
+    const newAccessToken = this.jwt.sign(payload, {
+      secret: process.env.JWT_SECRET,
+    });
+
+    return { accessToken: newAccessToken };
+  }
+
+  generateRefreshUrl(email: string) {
+    const payload = {
+      sub: email,
+    };
+
+    const refreshToken = this.jwt.sign(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: '5m',
+    });
+
+    this.mailService.sendMail(
+      email,
+      'REFRESH LINK',
+      `http://localhost:3000/auth/reset-password/${refreshToken}`,
+    );
+    return `Link "${email}" manziliga yuborildi`;
+  }
+
+  async resetPassword(token: string, password: string) {
+    const decoded = this.jwt.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
+
+    const currentUser = await this.userRepo.findOne({
+      where: { email: decoded.email },
+    });
+
+    const hashedPassword = await hashPassword(password);
+
+    currentUser.password = hashedPassword;
+    await this.userRepo.save(currentUser);
+
+    return 'Password updated successfuly';
   }
 }

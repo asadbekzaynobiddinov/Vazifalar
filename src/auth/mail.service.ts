@@ -14,7 +14,7 @@ export class MailService {
     },
   });
 
-  async sendMail(to: string, subject: string, text: number): Promise<void> {
+  async sendMail(to: string, subject: string, text: any): Promise<void> {
     await this.tranporter.sendMail({
       from: process.env.EMAIL,
       to,

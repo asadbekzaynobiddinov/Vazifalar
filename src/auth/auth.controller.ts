@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, Param } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -22,5 +22,25 @@ export class AuthController {
   @HttpCode(200)
   verify(@Body() user: OtpDto) {
     return this.authService.verify(user.user_email, user.otp_code);
+  }
+
+  @Post('refresh')
+  @HttpCode(200)
+  refresh(@Body('refreshToken') refreshToken: string) {
+    return this.authService.refreshAccess(refreshToken);
+  }
+
+  @Post('forget')
+  @HttpCode(200)
+  generateRefreshUrl(@Body('email') email: string) {
+    return this.authService.generateRefreshUrl(email);
+  }
+
+  @Post('reset-password/:token')
+  resetPassword(
+    @Param('token') token: string,
+    @Body('newPassword') newPassword: string,
+  ) {
+    return this.authService.resetPassword(token, newPassword);
   }
 }
