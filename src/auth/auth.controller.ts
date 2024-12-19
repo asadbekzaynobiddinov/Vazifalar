@@ -1,5 +1,16 @@
-import { Controller, Post, Body, HttpCode, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  Param,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthService } from './auth.service';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { OtpDto } from './dto/otp.dto';
@@ -42,5 +53,22 @@ export class AuthController {
     @Body('newPassword') newPassword: string,
   ) {
     return this.authService.resetPassword(token, newPassword);
+  }
+
+  @Post('single')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const filename = `${Date.now()}${extname(file.originalname)}`;
+          callback(null, filename);
+        },
+      }),
+    }),
+  )
+  uploadFile(@UploadedFile() file) {
+    console.log(file);
+    return { message: 'Fayl muvaffaqiyatli yuklandi', file };
   }
 }
