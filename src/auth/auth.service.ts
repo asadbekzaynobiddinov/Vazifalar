@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { Repository } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>,
+    private jwtService: JwtService,
+  ) {}
+
+  async register(regiteredUser: CreateUserDto): Promise<User> {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(regiteredUser.password, salt);
+
+    const user = this.userRepository.create({
+      ...regiteredUser,
+      password: hashedPassword,
+    });
+
+    return await this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async login(
+    email: string,
+    password: string,
+  ): Promise<{ accessToken: string }> {
+    const user = await this.userRepository.findOne({ where: { email } });
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('Invalid credentials');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    const payload = { userId: user.id, email: user.email };
+    const accessToken = this.jwtService.sign(payload);
+
+    return { accessToken };
   }
 }
