@@ -5,15 +5,15 @@ import { CommentsModule } from './comments/comments.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { OtpModule } from './otp/otp.module';
+import { config } from 'dotenv';
+config();
 
 @Module({
   imports: [
     UsersModule,
     PostsModule,
     CommentsModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://asadbekzaynobiddinov51:XwOPipdBD5YIIRt2@cluster0.32twq.mongodb.net/',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB),
     AuthModule,
     OtpModule,
   ],
