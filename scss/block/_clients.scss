@@ -1,5 +1,10 @@
+.clients {
+  background-color: #012f34;
+}
+
 .clients__block {
   padding-top: 140px;
+  padding-bottom: 140px;
   max-width: 1110px;
   margin-left: auto;
   margin-right: auto;
@@ -11,9 +16,14 @@
   line-height: 100%;
   text-align: center;
   color: #fff;
+  margin-bottom: 64px;
 }
 
 .clients__list {
   display: flex;
   justify-content: space-between;
+}
+
+.client__item {
+  background-color: transparent;
 }

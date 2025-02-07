@@ -243,8 +243,13 @@ body {
   position: absolute;
 }
 
+.clients {
+  background-color: #012f34;
+}
+
 .clients__block {
   padding-top: 140px;
+  padding-bottom: 140px;
   max-width: 1110px;
   margin-left: auto;
   margin-right: auto;
@@ -256,6 +261,7 @@ body {
   line-height: 100%;
   text-align: center;
   color: #fff;
+  margin-bottom: 64px;
 }
 
 .clients__list {
@@ -267,6 +273,104 @@ body {
           justify-content: space-between;
 }
 
-h1 {
-  background-color: red;
+.client__item {
+  background-color: transparent;
+}
+
+.ready {
+  position: relative;
+  background-color: #f67e7e;
+  padding: 76px 260px 76px 263px;
+}
+
+.ready__block {
+  max-width: 917px;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.ready__title {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 100%;
+  color: #012f34;
+}
+
+.ready__btn {
+  padding: 9px 33px 11px 32px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 156%;
+  color: #012f34;
+  border: 2px solid #012f34;
+  border-radius: 24px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.ready__img {
+  position: absolute;
+  left: 0;
+  top: 29%;
+}
+
+.footer {
+  background-color: #002529;
+  padding: 48px 165px;
+}
+
+.footer__block {
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.footer__list {
+  margin-top: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 40px;
+}
+
+.footer__sub_title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 156%;
+  color: #fff;
+}
+
+.footer__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 125px;
+}
+
+.footer__img1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.footer_img2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }/*# sourceMappingURL=main.css.map */
