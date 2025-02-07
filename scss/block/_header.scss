@@ -1,0 +1,93 @@
+.main_header {
+  background: #014e56;
+  position: relative;
+}
+
+.main_header__navbar {
+  max-width: 1110px;
+  padding-top: 73px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header__list {
+  display: flex;
+  gap: 40px;
+}
+
+.header__item {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.header__btn {
+  padding: 9px 33px 11px 32px;
+  border: 2px solid #fff;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 156%;
+  color: #fff;
+  cursor: pointer;
+  background: transparent;
+}
+
+.main__header__content {
+  max-width: 1110px;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.header__link {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 156%;
+  color: #fff;
+}
+
+.header__hero_text {
+  padding-top: 44px;
+  max-width: 730px;
+}
+
+.header__hero_title {
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 156%;
+  color: #fff;
+}
+
+.header__hero_text {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 156%;
+  color: #fff;
+}
+
+.line {
+  width: 50px;
+  height: 4px;
+  background-color: #f67e7e;
+  position: absolute;
+}
+
+.header__hero {
+  display: flex;
+  position: relative;
+}
+
+.header__img {
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+}
+

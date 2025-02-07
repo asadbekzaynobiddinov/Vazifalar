@@ -1,0 +1,95 @@
+.hero {
+  background: #004047;
+  position: relative;
+}
+
+.hero__content {
+  max-width: 1110px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 140px;
+  padding-bottom: 140px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero__title {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 100%;
+  text-align: center;
+  color: #fff;
+}
+
+.hereo__items {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 30px;
+  row-gap: 48px;
+}
+
+.hero__card {
+  position: relative;
+  padding: 32px 24px 56px 24px;
+  align-items: center;
+  max-width: 350px;
+  height: 281px;
+  background-color: #012f34;
+}
+
+.hero__sub_title {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  text-align: center;
+  color: #79c8c7;
+}
+
+.card__content {
+  align-items: center;
+}
+
+.hero_text {
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 167%;
+  text-align: center;
+  color: #fff;
+}
+
+.hero__img {
+  margin: 0 103px;
+}
+
+.plus_img {
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  margin-left: -28px;
+}
+
+.social_logos {
+  position: absolute;
+  left: 50%;
+  margin-top: 24px;
+  margin-left: -22px;
+}
+
+.hero__img1 {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.hero_img2 {
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
